@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { taskSchema } from "../task/schema";
 
 export const projectSchema = z.object({
   _id: z.string().default(""),
@@ -6,6 +7,8 @@ export const projectSchema = z.object({
   projectName: z.string().min(2, { message: "Project name is required" }).max(100),
   description: z.string().min(2, { message: "Description is required" }),
 });
+
+export const projectWithTasksSchema = projectSchema.extend({ tasks: z.array(taskSchema) })
 
 export const createProjectSchema = projectSchema.omit({ _id: true });
 export const editProjectSchema = projectSchema.omit({ _id: true });

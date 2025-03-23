@@ -2,6 +2,7 @@ import { Navigate, useParams } from "react-router-dom"
 import { toast } from "sonner"
 import { ProjectDetailsViewModel } from "./view.model"
 import AddTaskModal from "@/presentation/components/modals/add-task-modal"
+import TaskList from "../components/tasks/task-list"
 
 type Params = {
   projectId: string
@@ -31,6 +32,7 @@ export default function EditProjectView() {
             open={newTask}
           />
         </nav>
+        <TaskList tasks={data.data.tasks} />
       </div>
     )
   }

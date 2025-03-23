@@ -1,8 +1,10 @@
 
 import { z } from "zod";
 import { projectSchema, createProjectSchema } from "./schema";
+import { TTask } from "../task/types";
 
 export type TProject = z.infer<typeof projectSchema>;
+export type TProjectWithTasks = TProject & { tasks: TTask[] };
 export type TCreateProject = z.infer<typeof createProjectSchema>;
 
 export type ProjectFormData = Pick<TCreateProject, "clientName" | "projectName" | "description">;

@@ -1,6 +1,6 @@
 import { useProject } from "@/presentation/hooks/use-project"
 import { type TProject } from "@/domain/entities/project/types"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { AddTaskUseCase } from "@/domain/use-cases/tasks/add-task"
 import { toast } from "sonner"
 import { TTaskFormData } from "@/domain/entities/task/types"
@@ -10,7 +10,9 @@ import { createTaskSchema } from "@/domain/entities/task/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 export const ProjectDetailsViewModel = (projectId: TProject["_id"]) => {
 
+  const queryClient = useQueryClient()
   const { data, isLoading, error, isError } = useProject(projectId)
+  // console.log({ projects: data})
   const navigate = useNavigate()
 
   const location = useLocation()
@@ -29,6 +31,7 @@ export const ProjectDetailsViewModel = (projectId: TProject["_id"]) => {
   const { mutate } = useMutation({
     mutationFn: AddTaskUseCase,
     onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["project", projectId] })
       toast.success(data.message)
       navigate(location.pathname, { replace: true})
     },

@@ -1,16 +1,19 @@
 import { AxiosError } from "axios";
-import { TCreateProject, TEditProject, TProject } from "@/domain/entities/project/types";
-import { ProjectsRepository } from "@/domain/repositories/projects.repository";
 import { api } from "../sources/remote/api/api";
-import { ResponseApi } from "../sources/remote/models/response.model";
 import { ErrorResponse } from "../sources/remote/models/error.model";
-import { dashboardProjectSchema, projectSchema } from "@/domain/entities/project/schema";
+import { ResponseApi } from "../sources/remote/models/response.model";
+import { ProjectsRepository } from "@/domain/repositories/projects.repository";
+import { dashboardProjectSchema, projectWithTasksSchema } from "@/domain/entities/project/schema";
+import { TCreateProject, TEditProject, TProject, TProjectWithTasks } from "@/domain/entities/project/types";
 
 export class ProjectsRepositoryImpl implements ProjectsRepository {
   async getAll(): Promise<ResponseApi<TProject[]>> {
     try {
       const { data } = await api.get("/projects")
       const response = dashboardProjectSchema.safeParse(data)
+
+      console.log(response)
+
       if(response.success) {
         return {
           success: true,
@@ -45,13 +48,11 @@ export class ProjectsRepositoryImpl implements ProjectsRepository {
     }
   }
 
-  async findOne(id: TProject["_id"]): Promise<ResponseApi<TProject>> {
+  async findOne(id: TProject["_id"]): Promise<ResponseApi<TProjectWithTasks>> {
     try {
       const { data } = await api(`/projects/${id}`)
 
-      const response = projectSchema.safeParse(data)
-
-      console.log(response)
+      const response = projectWithTasksSchema.safeParse(data)
 
       if(response.success) {
         return {
