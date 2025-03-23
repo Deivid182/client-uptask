@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import RootLayout from "@/presentation/layouts/root.layout";
+import { AuthLayout, RootLayout } from "@/presentation/layouts";
 import DashboardView from "@/presentation/views/projects/dashboard-projects/dashboard.view";
-
 
 export const router = createBrowserRouter([
   {
@@ -41,5 +40,20 @@ export const router = createBrowserRouter([
         }
       }
     ],
+  },
+  {
+    path: "/auth",
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "/auth/login",
+        async lazy() {
+          const { default: Login } = await import("@/presentation/views/auth/login/login.view")
+          return {
+            Component: Login
+          }
+        }
+      },
+    ]
   }
 ])

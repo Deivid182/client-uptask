@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router-dom"
 import { Toaster } from 'sonner'
 import Logo from "@/presentation/components/logo"
 import NavMenu from "@/presentation/components/nav-menu"
-export default function RootLayout() {
+export function RootLayout() {
   return (
     <div className="space-y-4">
       <header className="bg-gray-800 py-5">
