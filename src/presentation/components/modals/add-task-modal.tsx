@@ -17,7 +17,7 @@ export default function AddTaskModal({ onSubmit, open, onOpenChange, form, onOpe
 
   return (
     <>
-      <Button onClick={onOpen}>Add Task</Button>
+      <Button variant="secondary" onClick={onOpen}>Add Task</Button>
       <Modal
         title="Add task"
         description="Add a new task to this project"
