@@ -63,6 +63,15 @@ export const router = createBrowserRouter([
           }
         }
       },
+      {
+        path: "verify",
+        async lazy() {
+          const { default: Verify } = await import("@/presentation/views/auth/verify-account/verify-account.view")
+          return {
+            Component: Verify
+          }
+        }
+      },
     ]
   },
 ])

@@ -20,3 +20,10 @@ export const responseLoginUserSchema = baseResponseSchema.extend({
   data: responseUserFound
 })
 
+export const verifyUserSchema = z.object({
+  token: z.string().min(6),
+})
+
+export const responseVerifyUserSchema = baseResponseSchema.extend({
+  data: responseUserFound
+})
