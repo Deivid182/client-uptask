@@ -55,7 +55,7 @@ export default function TaskList({ tasks }: Props) {
               {tasks.length === 0 ? (
                 <li className="text-gray-500 text-center pt-3">No Hay tareas</li>
               ) : (
-                tasks.map(task => <TaskCard key={task._id} task={task} />)
+                tasks.map(task => <TaskCard key={task.id} task={task} />)
               )}
             </ul>
           </div>

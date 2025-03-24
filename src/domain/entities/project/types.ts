@@ -10,6 +10,6 @@ export type TCreateProject = z.infer<typeof createProjectSchema>;
 export type ProjectFormData = Pick<TCreateProject, "clientName" | "projectName" | "description">;
 export type EditProjectFormData = Pick<TProject, "clientName" | "projectName" | "description">;
 export type TEditProject = {
-  _id: TProject["_id"];
+  id: TProject["id"];
   formData: ProjectFormData
 };
