@@ -46,7 +46,7 @@ export const router = createBrowserRouter([
     element: <AuthLayout />,
     children: [
       {
-        path: "/auth/login",
+        path: "login",
         async lazy() {
           const { default: Login } = await import("@/presentation/views/auth/login/login.view")
           return {
@@ -54,6 +54,15 @@ export const router = createBrowserRouter([
           }
         }
       },
+      {
+        path: "register",
+        async lazy() {
+          const { default: Register } = await import("@/presentation/views/users/register.view")
+          return {
+            Component: Register
+          }
+        }
+      },
     ]
-  }
+  },
 ])
